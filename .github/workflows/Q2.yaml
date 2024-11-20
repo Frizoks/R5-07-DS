@@ -9,24 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Vérifiez le code source
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Créer Q2_archive_README.md avec les informations demandées
       - name: Create Q2_archive_README.md
         run: |
           echo "LECARPENTIER Luc  -  $(date)" > Q2_archive_README.md
           echo "" >> Q2_archive_README.md
           cat README.md >> Q2_archive_README.md
 
-      # Configurer Git pour pousser les modifications
       - name: Configure Git
         run: |
           git config --global user.name "Frizoks"
           git config --global user.email "luc.lecarpentier5@gmail.com"
 
-      # Ajouter et pousser Q2_archive_README.md vers le dépôt
       - name: Push Q2_archive_README.md
         run: |
           git add Q2_archive_README.md
