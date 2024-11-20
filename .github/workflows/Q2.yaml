@@ -16,8 +16,7 @@ jobs:
       # Créer Q2_archive_README.md avec les informations demandées
       - name: Create Q2_archive_README.md
         run: |
-          echo "Nom et Prénom : LECARPENTIER Luc" > Q2_archive_README.md
-          echo "    Date et Heure : $(date)" >> Q2_archive_README.md
+          echo "LECARPENTIER Luc  -  $(date)" > Q2_archive_README.md
           echo "" >> Q2_archive_README.md
           cat README.md >> Q2_archive_README.md
 
