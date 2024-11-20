@@ -25,7 +25,6 @@ jobs:
 
       - name: Push Q4_archive_DATE.txt
         run: |
-          FILE_NAME="Q4_archive_${DATE}.txt"
-          git add $FILE_NAME
-          git commit -m "Add $FILE_NAME"
+          git add Q4_archive_$(date +'%d-%m-%Y').txt
+          git commit -m "Add Q4_archive_$(date +'%d-%m-%Y').txt"
           git push
