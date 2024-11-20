@@ -29,12 +29,11 @@ jobs:
 
     - name: Comparer avec l'ancien Q6_archive_date
       run: |
-        # Vérifier s'il existe un fichier précédent
         PREVIOUS_FILE=$(ls Q6_archive_*.txt | sort | tail -n 2 | head -n 1)
+        
         if [ -n "$PREVIOUS_FILE" ]; then
-          # Comparer les deux fichiers à l'aide de la commande diff
-          echo "Comparing $PREVIOUS_FILE with $FILE_NAME" 
-          diff $PREVIOUS_FILE $FILE_NAME > Q6_différences.txt
+          echo "Comparing $PREVIOUS_FILE with Q6_archive_${DATE}.txt"
+          diff $PREVIOUS_FILE Q6_archive_${DATE}.txt > Q6_différences.txt
         else
           echo "Aucun fichier précédent trouvé, aucune comparaison effectuée." > Q6_différences.txt
         fi
