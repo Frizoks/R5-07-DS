@@ -45,6 +45,7 @@ jobs:
  
     - name: Commit
       run: |
+        git pull --rebase origin main
         git add Q6_archive_${DATE}.txt Q6_différences.txt
         git commit -m "Add Q6_archive_${DATE}.txt and Q6_différences.txt"
         git push
