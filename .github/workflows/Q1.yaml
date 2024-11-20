@@ -12,7 +12,7 @@ jobs:
     steps:
       # Vérifiez le code source
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Copier le contenu de README.md dans Q1_archive_README.md
       - name: Create Q1_archive_README.md
