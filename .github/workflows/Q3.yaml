@@ -25,6 +25,7 @@ jobs:
 
       - name: Push Q3_archive_java.txt
         run: |
+          git pull --rebase origin main
           git add Q3_archive_java.txt
           git commit -m "Add Q3_archive_java.txt"
           git push
