@@ -9,24 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Vérifiez le code source
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Créer Q3_archive_java.txt avec nom, prénom et contenu de Q3.java
-      - name: Create Q3_archive_java.txt
+      - name: Creer Q3_archive_java.txt
         run: |
           echo "LECARPENTIER Luc" > Q3_archive_java.txt
           echo "" >> Q3_archive_java.txt
           cat Q3.java >> Q3_archive_java.txt
 
-      # Configurer Git pour pousser les modifications
       - name: Configure Git
         run: |
           git config --global user.name "Frizoks"
           git config --global user.email "luc.lecarpentier5@gmail.com"
 
-      # Ajouter et pousser Q3_archive_java.txt vers le dépôt
       - name: Push Q3_archive_java.txt
         run: |
           git add Q3_archive_java.txt
