@@ -1,9 +1,8 @@
-name: Q5 Workflow
+name: Q5_java_date
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
+permissions:
+  contents: write
 
 jobs:
   create_q5_archive:
