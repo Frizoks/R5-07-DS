@@ -1,0 +1,37 @@
+name: Q5 Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create_q5_archive:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Get formatted date
+      id: get_date
+      run: |
+        echo "DATE=$(date +'%d-%m-%Y')" >> $GITHUB_ENV
+
+    - name: Create Q5 archive file
+      run: |
+        FILE_NAME="Q5_archive_${DATE}.txt"
+        echo "LECARPENTIER Luc" > $FILE_NAME
+        echo " " >> $FILE_NAME
+        cat Q5.java >> $FILE_NAME
+
+    - name: Configuration de Git
+      run: |
+        git config --global user.name "Frizoks"
+        git config --global user.email "luc.lecarpentier5@gmail.com"
+
+    - name: Commit and push Q5 archive file
+      run: |
+        git add Q5_archive_${DATE}.txt
+        git commit -m "Add Q5_archive_${DATE}.txt"
+        git push
