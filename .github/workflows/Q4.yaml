@@ -1,4 +1,4 @@
-name: Add Q4_archive_date
+name: Q4_archive_date
 
 on: [push]
 permissions:
@@ -12,11 +12,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Obtenir la date au format JJ-MM-AAAA
+      - name: Get formatted date
+        id: get_date
+        run: |
+          echo "DATE=$(date +'%d-%m-%Y')" >> $GITHUB_ENV
+
       - name: Create Q4_archive_DATE.txt
         run: |
-          echo "LECARPENTIER Luc" > "Q4_archive_$(date +'%d-%m-%Y').txt"
-          echo "" >> "Q4_archive_$(date +'%d-%m-%Y').txt"
-          cat Q4.java >> "Q4_archive_$(date +'%d-%m-%Y').txt"
+          FILE_NAME="Q4_archive_${DATE}.txt"
+          echo "LECARPENTIER Luc" > $FILE_NAME
+          echo "" >> $FILE_NAME
+          cat Q4.java >> $FILE_NAME
 
       - name: Configure Git
         run: |
@@ -25,9 +32,7 @@ jobs:
 
       - name: Push Q4_archive_DATE.txt
         run: |
-          git stash
-          git pull --rebase origin main
-          git stash pop
-          git add Q4_archive_$(date +'%d-%m-%Y').txt
-          git commit -m "Add Q4_archive_$(date +'%d-%m-%Y').txt"
+          FILE_NAME="Q4_archive_${DATE}.txt"
+          git add $FILE_NAME
+          git commit -m "Add $FILE_NAME with workflow execution details"
           git push
