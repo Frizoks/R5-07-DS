@@ -1,0 +1,51 @@
+name: Q6_archive_date + Q6_differences
+
+on: [push]
+permissions:
+  contents: write
+
+jobs:
+  create_q6_archive:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Get formatted date and time
+      id: get_date
+      run: |
+        DATE=$(date +'%d-%m-%Y-%H%M%S')
+        echo "DATE=${DATE}" >> $GITHUB_ENV
+
+    - name: Creer Q6_archive_date
+      run: |
+        FILE_NAME="Q6_archive_${DATE}.txt"
+        echo "LECARPENTIER Luc" > $FILE_NAME
+        cat Q6.java >> $FILE_NAME
+        echo "Taille du fichier Q6.java (en caractères et en lignes):" >> $FILE_NAME
+        wc -c < Q6.java >> $FILE_NAME
+        wc -l < Q6.java >> $FILE_NAME
+
+    - name: Comparer avec l'ancien Q6_archive_date
+      run: |
+        # Vérifier s'il existe un fichier précédent
+        PREVIOUS_FILE=$(ls Q6_archive_*.txt | sort | tail -n 2 | head -n 1)
+        if [ -n "$PREVIOUS_FILE" ]; then
+          # Comparer les deux fichiers à l'aide de la commande diff
+          echo "Comparing $PREVIOUS_FILE with $FILE_NAME" 
+          diff $PREVIOUS_FILE $FILE_NAME > Q6_différences.txt
+        else
+          echo "Aucun fichier précédent trouvé, aucune comparaison effectuée." > Q6_différences.txt
+        fi
+
+    - name: Configuration de Git
+      run: |
+        git config --global user.name "Frizoks"
+        git config --global user.email "luc.lecarpentier5@gmail.com"
+ 
+    - name: Commit
+      run: |
+        git add Q6_archive_${DATE}.txt Q6_différences.txt
+        git commit -m "Add Q6_archive_${DATE}.txt and Q6_différences.txt"
+        git push
