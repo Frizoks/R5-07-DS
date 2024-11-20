@@ -1,4 +1,4 @@
-Nom et Prénom : John Doe
+LECARPENTIER Luc
 
 public class Q3
 {
