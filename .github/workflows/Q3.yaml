@@ -16,7 +16,7 @@ jobs:
       # Créer Q3_archive_java.txt avec nom, prénom et contenu de Q3.java
       - name: Create Q3_archive_java.txt
         run: |
-          echo "Nom et Prénom : John Doe" > Q3_archive_java.txt
+          echo "LECARPENTIER Luc" > Q3_archive_java.txt
           echo "" >> Q3_archive_java.txt
           cat Q3.java >> Q3_archive_java.txt
 
