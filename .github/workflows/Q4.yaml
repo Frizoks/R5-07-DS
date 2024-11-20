@@ -28,3 +28,4 @@ jobs:
           git pull --rebase origin main
           git add Q4_archive_$(date +'%d-%m-%Y').txt
           git commit -m "Add Q4_archive_$(date +'%d-%m-%Y').txt"
+          git push
