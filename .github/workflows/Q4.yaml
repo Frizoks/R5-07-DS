@@ -1,0 +1,31 @@
+name: Add Q4_archive_date
+
+on: [push]
+permissions:
+  contents: write
+
+jobs:
+  archive-java-with-date:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create Q4_archive_DATE.txt
+        run: |
+          echo "LECARPENTIER Luc" > "Q4_archive_$(date +'%d-%m-%Y').txt"
+          echo "" >> "Q4_archive_$(date +'%d-%m-%Y').txt"
+          cat Q4.java >> "Q4_archive_$(date +'%d-%m-%Y').txt"
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Frizoks"
+          git config --global user.email "luc.lecarpentier5@gmail.com"
+
+      - name: Push Q4_archive_DATE.txt
+        run: |
+          FILE_NAME="Q4_archive_${DATE}.txt"
+          git add $FILE_NAME
+          git commit -m "Add $FILE_NAME"
+          git push
