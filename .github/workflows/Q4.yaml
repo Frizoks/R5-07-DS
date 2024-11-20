@@ -33,6 +33,7 @@ jobs:
       - name: Push Q4_archive_DATE.txt
         run: |
           FILE_NAME="Q4_archive_${DATE}.txt"
+          git pull --rebase origin main
           git add $FILE_NAME
           git commit -m "Add $FILE_NAME with workflow execution details"
           git push
